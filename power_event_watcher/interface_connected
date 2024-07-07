@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if system_profiler SPUSBDataType | grep -q '0x2902';  then # Product ID
+  echo "true"
+else 
+  echo "false"
+fi
+

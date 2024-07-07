@@ -1,0 +1,30 @@
+#!/bin/bash
+
+EVENT=$1
+
+HASS_URL="http://10.0.0.76:8123/api/states/input_boolean.mac_ext_speakers"
+TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxOGU5OTJkZjY5N2Y0MGQ4YjlkYzkxOGMwNGE1YWIwZiIsImlhdCI6MTcxOTQxMTc4OSwiZXhwIjoyMDM0NzcxNzg5fQ.1KG_Akil2HMgHUnxxQ2D0Neyknl8BzrKJt_YQ44ZPy8"
+
+turn_on() {
+curl \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-type: application/json" \
+      -d '{"state": "on"}' \
+      $HASS_URL
+}
+turn_off() {
+curl \
+      -H "Authorization: Bearer $TOKEN" \
+      -H "Content-type: application/json" \
+      -d '{"state": "off"}' \
+      $HASS_URL
+}
+#http://192.168.0.45:8123/api/states/input_boolean.arch_sleep_state
+if /Users/caleb/dev/personal/smarthome/power_event_watcher/interface_connected | grep -q "true"; then
+  if [ "$EVENT" == "off" ]; then
+    turn_off
+  elif [ "$EVENT" == "on" ]; then
+    turn_on
+  fi
+fi
+
