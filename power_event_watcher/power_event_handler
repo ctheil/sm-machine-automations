@@ -1,9 +1,9 @@
 #!/bin/bash
 
 EVENT=$1
-source /Users/caleb/dev/personal/smarthome/.env
 
 HASS_URL="http://10.0.0.76:8123/api/states/input_boolean.mac_ext_speakers"
+source /Users/caleb/dev/personal/smarthome/.env
 TOKEN="$hass_token"
 
 turn_on() {
